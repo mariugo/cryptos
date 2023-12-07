@@ -8,4 +8,15 @@ class HomeController extends Cubit<HomeState> {
   HomeController({
     required this.getCoinsUsecase,
   }) : super(const HomeState.initial());
+
+  Future<void> getCoins() async {
+    emit(state.copyWith(status: HomeStatus.loading));
+    try {
+      final coins = await getCoinsUsecase.call();
+      emit(state.copyWith(status: HomeStatus.success, coins: coins));
+    } catch (_) {
+      emit(state.copyWith(
+          status: HomeStatus.error, message: 'No data received'));
+    }
+  }
 }
