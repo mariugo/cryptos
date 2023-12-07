@@ -1,7 +1,13 @@
+import 'package:cryptos/app/features/home/domain/usecases/get_coins_usecase.dart';
+import 'package:cryptos/app/features/home/presentation/controller/home_controller.dart';
 import 'package:cryptos/app/features/home/presentation/screens/home_screen.dart';
+import 'package:cryptos/core/di/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 void main() {
+  initDI();
   runApp(const MyApp());
 }
 
@@ -10,13 +16,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Cryptos',
-      theme: ThemeData.dark(
-        useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeController>(
+          create: (context) => HomeController(
+            getCoinsUsecase: GetIt.I.get<GetCoinsUsecase>(),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Cryptos',
+        theme: ThemeData.dark(
+          useMaterial3: true,
+        ),
+        home: const HomeScreen(),
       ),
-      home: const HomeScreen(),
     );
   }
 }
