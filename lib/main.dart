@@ -1,3 +1,5 @@
+import 'package:cryptos/app/features/details/domain/usecases/get_coin_cart_usecase.dart';
+import 'package:cryptos/app/features/details/presentation/controller/detail_screen_controller.dart';
 import 'package:cryptos/app/features/home/domain/usecases/get_coins_usecase.dart';
 import 'package:cryptos/app/features/home/presentation/controller/home_controller.dart';
 import 'package:cryptos/app/features/home/presentation/screens/home_screen.dart';
@@ -21,6 +23,11 @@ class MyApp extends StatelessWidget {
         BlocProvider<HomeController>(
           create: (context) => HomeController(
             getCoinsUsecase: GetIt.I.get<GetCoinsUsecase>(),
+          ),
+        ),
+        BlocProvider<DetailScreenController>(
+          create: (context) => DetailScreenController(
+            getCoinChartUsecase: GetIt.I.get<GetCoinChartUsecase>(),
           ),
         ),
       ],
