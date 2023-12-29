@@ -1,3 +1,4 @@
+import 'package:cryptos/app/features/details/presentation/screens/detail_screen.dart';
 import 'package:cryptos/app/features/home/presentation/controller/home_controller.dart';
 import 'package:cryptos/app/features/home/presentation/controller/home_state.dart';
 import 'package:cryptos/app/features/home/presentation/widgets/coin_tile.dart';
@@ -78,15 +79,25 @@ class _HomeScreenState extends BaseState<HomeScreen, HomeController> {
                   : SafeArea(
                       child: SingleChildScrollView(
                         child: ListView.builder(
-                          shrinkWrap: true,
+                          //shrinkWrap: true,
                           itemCount: state.coins.length,
                           itemBuilder: (context, index) {
-                            return CoinTile(
-                              imageUrl: state.coins[index].image,
-                              name: state.coins[index].name,
-                              price: state.coins[index].currentPrice,
-                              priceChangePercentage24h:
-                                  state.coins[index].priceChangePercentage24h,
+                            return GestureDetector(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailScreen(
+                                    coin: state.coins[index],
+                                  ),
+                                ),
+                              ),
+                              child: CoinTile(
+                                imageUrl: state.coins[index].image,
+                                name: state.coins[index].name,
+                                price: state.coins[index].currentPrice,
+                                priceChangePercentage24h:
+                                    state.coins[index].priceChangePercentage24h,
+                              ),
                             );
                           },
                         ),
