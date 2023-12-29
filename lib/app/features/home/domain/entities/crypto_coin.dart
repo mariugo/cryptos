@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-base class CryptoCoin extends Equatable {
+abstract base class CryptoCoin extends Equatable {
   final String id;
   final String symbol;
   final String name;
