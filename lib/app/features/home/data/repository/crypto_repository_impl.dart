@@ -8,7 +8,7 @@ import 'package:cryptos/core/network/http_adapter.dart';
 class CryptoRepositoryImpl implements CryptoRepository {
   final HttpAdapter httpAdapter;
 
-  CryptoRepositoryImpl({required this.httpAdapter});
+  const CryptoRepositoryImpl({required this.httpAdapter});
 
   @override
   Future<List<CryptoCoinModel>> getTopCoins() async {
